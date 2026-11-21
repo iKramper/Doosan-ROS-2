@@ -2,7 +2,42 @@
 
 <robot name="e0509"
 	xmlns:xacro="http://www.ros.org/wiki/xacro">
+	<!-- Seventh Axis (New Base Link) -->
 	<link name="base_link">
+		<inertial>
+			<mass value="25.0"/>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<inertia ixx="0.113333" ixy="0.0" ixz="0.0" iyy="2.113333" iyz="0.0" izz="2.166667"/>
+		</inertial>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<box size="1.0 0.2 0.12"/>
+			</geometry>
+		</collision>
+		<visual>
+			<origin rpy="0 0 0" xyz="-0.5 0 0"/>
+			<geometry>
+				<mesh filename="package://doosan_description/meshes/seventh_axis.stl" scale="0.001 0.001 0.001"/>
+			</geometry>
+			<material name="aluminum">
+				<color rgba="0.75 0.77 0.80 1.0"/>
+			</material>
+		</visual>
+	</link>
+
+	<!-- Prismatic Joint along the Seventh Axis -->
+	<joint name="joint_seventh_axis" type="prismatic">
+		<parent link="base_link"/>
+		<child link="arm_base_link"/>
+		<origin rpy="0 0 0" xyz="0 0.1 0.12"/>
+		<axis xyz="1 0 0"/>
+		<limit effort="500" lower="-0.4" upper="0.4" velocity="1.0"/>
+		<dynamics damping="0.0" friction="0.0"/>
+	</joint>
+
+	<!-- Doosan E0509 Base Link -->
+	<link name="arm_base_link">
 		<inertial>
 			<mass value="1.803"/>
 			<origin xyz="2.7e-05   -0.002651    0.035122"/>
@@ -22,14 +57,14 @@
 		</visual>
 	</link>
 	<link name="base"/>
-	<joint name="base_link-base" type="fixed">
+	<joint name="arm_base_link-base" type="fixed">
 		<origin rpy="0 0 0" xyz="0 0 0.450"/>
-		<parent link="base_link"/>
+		<parent link="arm_base_link"/>
 		<child link="base"/>
 	</joint>
 	<!-- joint 1 -->
 	<joint name="joint_1" type="revolute">
-		<parent link="base_link" />
+		<parent link="arm_base_link" />
 		<child link="link_1" />
 		<origin rpy="0 0 0" xyz="0 0 0.2045"/>
 		<axis xyz="0 0 1"/>

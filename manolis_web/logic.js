@@ -1,4 +1,5 @@
 
+
 /* ==========================================
    MANOLIS - HMI
    SISTEMA DE PEDIDOS DE HELADOS
@@ -341,39 +342,98 @@ document.addEventListener("keydown", (evento) => {
 // 8. CONFIRMAR PEDIDO
 // ==========================================
 
-btnEnviar.addEventListener("click", () => {
 
-    if (pedidoActual) return;
+// ==========================================
+// 8. CONFIRMAR PEDIDO Y ACTIVAR ROS 2
+// ==========================================
 
-    // Generar número de pedido
-    numeroPedido++;
+let enviandoPedido = false;
 
-    // Crear objeto con información del pedido
-    pedidoActual = {
+btnEnviar.addEventListener("click", async () => {
 
-        id: numeroPedido,
+    if (pedidoActual || enviandoPedido) return;
 
+    if (saboresSeleccionados.length === 0) {
+        alert("Selecciona al menos un sabor.");
+        return;
+    }
+
+    // Crear pedido
+    const pedido = {
         sabores: [...saboresSeleccionados],
-
         presentacion: "vaso",
-
-        cantidad: cantidad,
-
-        estado: "recibido",
-
-        fecha: new Date().toISOString()
-
+        cantidad: cantidad
     };
 
-    // Mostrarlo en consola
-    console.log("PEDIDO CONFIRMADO:");
-    console.log(pedidoActual);
+    enviandoPedido = true;
+    btnEnviar.disabled = true;
+    btnEnviar.textContent = "Enviando...";
 
-    // Cerrar ventana
-    cerrarModal();
+    try {
 
-    // Mostrar seguimiento
-    iniciarSeguimiento();
+        // Enviar pedido al servidor de Ubuntu
+        const respuesta = await fetch(
+            "http://127.0.0.1:5000/api/pedido",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(pedido)
+            }
+        );
+
+        const resultado = await respuesta.json();
+
+        if (!respuesta.ok) {
+            throw new Error(
+                resultado.error || "Error al enviar pedido"
+            );
+        }
+
+        console.log("Respuesta ROS 2:", resultado);
+
+        // Guardar el pedido en el HMI
+        numeroPedido++;
+
+        pedidoActual = {
+            id: numeroPedido,
+            ...pedido,
+            estado: "enviado_a_ros2",
+            fecha: new Date().toISOString()
+        };
+
+        // Cerrar modal
+        cerrarModal();
+
+        // Abrir seguimiento
+        iniciarSeguimiento();
+
+        actualizarEstado(
+            "enviado_a_ros2",
+            "Orden enviada a ROS 2. Revisa RViz.",
+            10,
+            0
+        );
+
+    } catch (error) {
+
+        console.error("Error de comunicación:", error);
+
+        alert(
+            "No se pudo activar ROS 2:\n" +
+            error.message
+        );
+
+    } finally {
+
+        enviandoPedido = false;
+        btnEnviar.disabled = false;
+        btnEnviar.textContent = "Sí, confirmar";
+
+    }
 
 });
 
@@ -414,7 +474,7 @@ function iniciarSeguimiento() {
     );
 
     // Simular preparación
-    simularPreparacion();
+    //simularPreparacion();
 
     // Desplazar página hacia el seguimiento
     seccionSeguimiento.scrollIntoView({

@@ -21,6 +21,7 @@ public:
 
   using FollowJointTrajectory = control_msgs::action::FollowJointTrajectory;
   using JointTrajectoryPoint = trajectory_msgs::msg::JointTrajectoryPoint;
+
   using GoalHandleFollowJointTrajectory = rclcpp_action::ClientGoalHandle<FollowJointTrajectory>;
 
   explicit ManolisTrajectory(
@@ -292,17 +293,13 @@ private:
     {
       if (!goal_handle)
       {
-        RCLCPP_ERROR(
-          this->get_logger(),
-          "El controlador rechazo la trayectoria"
-        );
-      }
-      else
-      {
-        RCLCPP_INFO(
-          this->get_logger(),
-          "Trayectoria aceptada. Iniciando movimiento..."
-        );
+          RCLCPP_ERROR(
+              this->get_logger(),
+              "El controlador rechazo la trayectoria"
+          );
+
+          rclcpp::shutdown();
+          return;
       }
     };
 
@@ -346,87 +343,87 @@ private:
 
     send_goal_options.result_callback =
       [this](
-        const GoalHandleFollowJointTrajectory::WrappedResult &
-          result)
+        const GoalHandleFollowJointTrajectory::WrappedResult & result)
     {
-      switch (result.code)
-      {
-        case rclcpp_action::ResultCode::SUCCEEDED:
-          RCLCPP_INFO(
-            this->get_logger(),
-            "El controlador termino la ejecucion"
-          );
-          break;
+        bool exito = false;
 
-        case rclcpp_action::ResultCode::ABORTED:
-          RCLCPP_ERROR(
-            this->get_logger(),
-            "La trayectoria fue abortada"
-          );
-          return;
+        switch (result.code)
+        {
+            case rclcpp_action::ResultCode::SUCCEEDED:
 
-        case rclcpp_action::ResultCode::CANCELED:
-          RCLCPP_WARN(
-            this->get_logger(),
-            "La trayectoria fue cancelada"
-          );
-          return;
+                if (
+                    result.result &&
+                    result.result->error_code ==
+                    FollowJointTrajectory::Result::SUCCESSFUL
+                )
+                {
+                    RCLCPP_INFO(
+                        this->get_logger(),
+                        "TRAYECTORIA MANOLIS FINALIZADA CORRECTAMENTE"
+                    );
 
-        default:
-          RCLCPP_ERROR(
-            this->get_logger(),
-            "Resultado desconocido de la accion"
-          );
-          return;
-      }
+                    exito = true;
+                }
+                else
+                {
+                    RCLCPP_ERROR(
+                        this->get_logger(),
+                        "El controlador reporto un error de trayectoria"
+                    );
 
-      // Verificar resultado real
-      if (!result.result)
-      {
-        RCLCPP_ERROR(
-          this->get_logger(),
-          "El controlador no devolvio un resultado valido"
+                    if (result.result)
+                    {
+                        RCLCPP_ERROR(
+                            this->get_logger(),
+                            "Codigo: %d - Descripcion: %s",
+                            result.result->error_code,
+                            result.result->error_string.c_str()
+                        );
+                    }
+                }
+
+                break;
+
+            case rclcpp_action::ResultCode::ABORTED:
+
+                RCLCPP_ERROR(
+                    this->get_logger(),
+                    "Trayectoria abortada"
+                );
+                break;
+
+            case rclcpp_action::ResultCode::CANCELED:
+
+                RCLCPP_WARN(
+                    this->get_logger(),
+                    "Trayectoria cancelada"
+                );
+                break;
+
+            default:
+
+                RCLCPP_ERROR(
+                    this->get_logger(),
+                    "Resultado desconocido"
+                );
+                break;
+        }
+
+        if (exito)
+        {
+            RCLCPP_INFO(
+                this->get_logger(),
+                "Robot disponible para un nuevo pedido"
+            );
+        }
+
+        RCLCPP_INFO(
+            this->get_logger(),
+            "Cerrando nodo manolis_trajectory..."
         );
-        return;
-      }
 
-      if (
-        result.result->error_code !=
-        FollowJointTrajectory::Result::SUCCESSFUL
-      )
-      {
-        RCLCPP_ERROR(
-          this->get_logger(),
-          "Fallo de trayectoria. Codigo: %d. "
-          "Descripcion: %s",
-          result.result->error_code,
-          result.result->error_string.c_str()
-        );
-        return;
-      }
-
-      RCLCPP_INFO(
-        this->get_logger(),
-        "========================================"
-      );
-
-      RCLCPP_INFO(
-        this->get_logger(),
-        "TRAYECTORIA MANOLIS FINALIZADA"
-      );
-
-      RCLCPP_INFO(
-        this->get_logger(),
-        "Robot E0509: 18 puntos completados"
-      );
-
-      RCLCPP_INFO(
-        this->get_logger(),
-        "========================================"
-      );
-
-      // No se cierra rclcpp globalmente,
-      // porque este nodo funciona como componente.
+        // Finalizar el proceso ROS 2
+        rclcpp::shutdown();
     };
 
     // Envio asincrono

@@ -1,0 +1,603 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fff9f1">
+
+    <title>Manuflex | Heladería Automatizada</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ============================
+         ENCABEZADO
+    ============================= -->
+    <header class="header">
+        <div class="container header-content">
+            <a href="#inicio" class="logo">
+                <span class="logo-icon">🍦</span>
+                <span>MANO<span class="logo-accent">LIS</span></span>
+            </a>
+
+            <nav class="navbar">
+                <a href="#inicio">Inicio</a>
+                <a href="#sabores">Sabores</a>
+                <a href="#personalizar">Mi pedido</a>
+            </nav>
+
+            <a href="#personalizar" class="header-button">
+                <span>🛍</span> Mi pedido
+            </a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ============================
+             INICIO / HERO
+        ============================= -->
+        <section class="hero" id="inicio">
+            <div class="container hero-content">
+
+                <div class="hero-text">
+                    <span class="eyebrow">
+                        ✦ HELADERÍA AUTOMATIZADA
+                    </span>
+
+                    <h1>
+                        Tu helado favorito,
+                        <span>hecho a tu gusto.</span>
+                    </h1>
+
+                    <p>
+                        Elige tus sabores favoritos y disfruta
+                        de una experiencia diferente.
+                        Tú haces el pedido, nuestra tecnología
+                        se encarga de servirlo.
+                    </p>
+
+                    <a href="#sabores" class="btn btn-primary">
+                        Crear mi helado
+                        <span>→</span>
+                    </a>
+
+                    <div class="hero-features">
+                        <span>✓ 12 sabores clásicos</span>
+                        <span>✓ Combina 2 sabores</span>
+                        <span>✓ Preparación automatizada</span>
+                    </div>
+                </div>
+
+                <div class="hero-art">
+                    <div class="decoration decoration-one"></div>
+                    <div class="decoration decoration-two"></div>
+
+                    <div class="hero-circle">
+                        <div class="hero-icecream">
+                            <div class="hero-scoop scoop-chocolate"></div>
+                            <div class="hero-scoop scoop-vanilla"></div>
+                            <div class="hero-cup">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="floating-label">
+                        <span>🍨</span>
+                        <div>
+                            <strong>¡A tu manera!</strong>
+                            <small>Escoge y combina</small>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================
+             CÓMO FUNCIONA
+        ============================= -->
+        <section class="steps-section">
+            <div class="container">
+                <div class="steps-grid">
+
+                    <div class="step-item">
+                        <span class="step-icon">01</span>
+                        <div>
+                            <h3>Escoge</h3>
+                            <p>Selecciona tus sabores favoritos.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-divider">→</div>
+
+                    <div class="step-item">
+                        <span class="step-icon">02</span>
+                        <div>
+                            <h3>Personaliza</h3>
+                            <p>Configura tu helado en vaso.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-divider">→</div>
+
+                    <div class="step-item">
+                        <span class="step-icon">03</span>
+                        <div>
+                            <h3>Disfruta</h3>
+                            <p>Nuestro robot sirve tu helado.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================
+             CATÁLOGO DE SABORES
+        ============================= -->
+        <section class="flavors-section" id="sabores">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="eyebrow">HECHOS PARA DISFRUTAR</span>
+                    <h2>Nuestros <span>sabores clásicos</span></h2>
+                    <p>
+                        Inspirados en Manolis Ice Cream.
+                        Selecciona uno o combina dos sabores
+                        para crear tu helado ideal.
+                    </p>
+                </div>
+
+                <div class="flavor-counter">
+                    <span>🍨 Selecciona hasta 2 sabores</span>
+                    <strong id="contador-sabores">0 / 2 seleccionados</strong>
+                </div>
+
+                <div class="flavors-grid">
+
+                    <!-- 1. BLACKBERRY -->
+                    <button class="flavor-card" type="button"
+                            data-sabor="Blackberry">
+                        <span class="flavor-check">✓</span>
+                        <div class="flavor-visual berry-bg">
+                            <div class="ice-scoop berry-ice"></div>
+                        </div>
+                        <div class="flavor-info">
+                            <h3>Blackberry</h3>
+                            <p>Mora</p>
+                            <span class="flavor-action">Seleccionar +</span>
+                        </div>
+                    </button>
+
+                    <!-- 2. VANILLA -->
+                    <button class="flavor-card" type="button"
+                            data-sabor="Vanilla">
+                        <span class="flavor-check">✓</span>
+                        <div class="flavor-visual vanilla-bg">
+                            <div class="ice-scoop vanilla-ice"></div>
+                        </div>
+                        <div class="flavor-info">
+                            <h3>Vanilla</h3>
+                            <p>Vainilla</p>
+                            <span class="flavor-action">Seleccionar +</span>
+                        </div>
+                    </button>
+
+                    <!-- 3. CHOCOLATE -->
+                    <button class="flavor-card" type="button"
+                            data-sabor="Chocolate">
+                        <span class="flavor-check">✓</span>
+                        <div class="flavor-visual chocolate-bg">
+                            <div class="ice-scoop chocolate-ice"></div>
+                        </div>
+                        <div class="flavor-info">
+                            <h3>Chocolate</h3>
+                            <p>Chocolate clásico</p>
+                            <span class="flavor-action">Seleccionar +</span>
+                        </div>
+                    </button>
+
+                    <!-- 4. STRAWBERRY -->
+                    <button class="flavor-card" type="button"
+                            data-sabor="Strawberry">
+                        <span class="flavor-check">✓</span>
+                        <div class="flavor-visual strawberry-bg">
+                            <div class="ice-scoop strawberry-ice"></div>
+                        </div>
+                        <div class="flavor-info">
+                            <h3>Strawberry</h3>
+                            <p>Fresa</p>
+                            <span class="flavor-action">Seleccionar +</span>
+                        </div>
+                    </button>
+
+                    <!-- 5. COOKIES & CREAM -->
+                    <button class="flavor-card" type="button"
+                            data-sabor="Cookies & Cream">
+                        <span class="flavor-check">✓</span>
+                        <div class="flavor-visual cookies-bg">
+                            <div class="ice-scoop cookies-ice"></div>
+                        </div>
+                        <div class="flavor-info">
+                            <h3>Cookies & Cream</h3>
+                            <p>Galletas y crema</p>
+                            <span class="flavor-action">Seleccionar +</span>
+                        </div>
+                    </button>
+
+                    <!-- 6. COOKIE DOUGH -->
+                    <button class="flavor-card" type="button"
+                            data-sabor="Cookie Dough">
+                        <span class="flavor-check">✓</span>
+                        <div class="flavor-visual dough-bg">
+                            <div class="ice-scoop dough-ice"></div>
+                        </div>
+                        <div class="flavor-info">
+                            <h3>Cookie Dough</h3>
+                            <p>Masa de galleta</p>
+                            <span class="flavor-action">Seleccionar +</span>
+                        </div>
+                    </button>
+
+                    <!-- 7. COFFEE -->
+                    <button class="flavor-card" type="button"
+                            data-sabor="Coffee">
+                        <span class="flavor-check">✓</span>
+                        <div class="flavor-visual coffee-bg">
+                            <div class="ice-scoop coffee-ice"></div>
+                        </div>
+                        <div class="flavor-info">
+                            <h3>Coffee</h3>
+                            <p>Café</p>
+                            <span class="flavor-action">Seleccionar +</span>
+                        </div>
+                    </button>
+
+                    <!-- 8. DULCE DE LECHE -->
+                    <button class="flavor-card" type="button"
+                            data-sabor="Dulce de Leche">
+                        <span class="flavor-check">✓</span>
+                        <div class="flavor-visual dulce-bg">
+                            <div class="ice-scoop dulce-ice"></div>
+                        </div>
+                        <div class="flavor-info">
+                            <h3>Dulce de Leche</h3>
+                            <p>Arequipe</p>
+                            <span class="flavor-action">Seleccionar +</span>
+                        </div>
+                    </button>
+
+                    <!-- 9. MINT CHOCOLATE CHIP -->
+                    <button class="flavor-card" type="button"
+                            data-sabor="Mint Chocolate Chip">
+                        <span class="flavor-check">✓</span>
+                        <div class="flavor-visual mint-bg">
+                            <div class="ice-scoop mint-ice"></div>
+                        </div>
+                        <div class="flavor-info">
+                            <h3>Mint Chocolate Chip</h3>
+                            <p>Menta con chocolate</p>
+                            <span class="flavor-action">Seleccionar +</span>
+                        </div>
+                    </button>
+
+                    <!-- 10. CHERRIES & CHOCOLATE -->
+                    <button class="flavor-card" type="button"
+                            data-sabor="Cherries & Chocolate">
+                        <span class="flavor-check">✓</span>
+                        <div class="flavor-visual cherry-bg">
+                            <div class="ice-scoop cherry-ice"></div>
+                        </div>
+                        <div class="flavor-info">
+                            <h3>Cherries & Chocolate</h3>
+                            <p>Cerezas con chocolate</p>
+                            <span class="flavor-action">Seleccionar +</span>
+                        </div>
+                    </button>
+
+                    <!-- 11. COCONUT -->
+                    <button class="flavor-card" type="button"
+                            data-sabor="Coconut">
+                        <span class="flavor-check">✓</span>
+                        <div class="flavor-visual coconut-bg">
+                            <div class="ice-scoop coconut-ice"></div>
+                        </div>
+                        <div class="flavor-info">
+                            <h3>Coconut</h3>
+                            <p>Coco</p>
+                            <span class="flavor-action">Seleccionar +</span>
+                        </div>
+                    </button>
+
+                    <!-- 12. TIRAMISU -->
+                    <button class="flavor-card" type="button"
+                            data-sabor="Tiramisu">
+                        <span class="flavor-check">✓</span>
+                        <div class="flavor-visual tiramisu-bg">
+                            <div class="ice-scoop tiramisu-ice"></div>
+                        </div>
+                        <div class="flavor-info">
+                            <h3>Tiramisu</h3>
+                            <p>Postre italiano</p>
+                            <span class="flavor-action">Seleccionar +</span>
+                        </div>
+                    </button>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================
+             PERSONALIZACIÓN DEL PEDIDO
+        ============================= -->
+        <section class="order-section" id="personalizar">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="eyebrow">CASI ESTÁ LISTO</span>
+                    <h2>Personaliza <span>tu pedido</span></h2>
+                    <p>
+                        Revisa tu selección y configura
+                        la cantidad de helados.
+                    </p>
+                </div>
+
+                <div class="order-layout">
+
+                    <!-- CONFIGURACIÓN -->
+                    <div class="configuration-panel">
+
+                        <div class="panel-heading">
+                            <span class="panel-step">01</span>
+                            <div>
+                                <h3>Sabores seleccionados</h3>
+                                <p>Puedes elegir uno o dos sabores.</p>
+                            </div>
+                        </div>
+
+                        <div class="selected-flavors" id="sabores-seleccionados">
+                            <div class="empty-selection">
+                                <span>🍨</span>
+                                <p>Todavía no has seleccionado sabores.</p>
+                                <a href="#sabores">Explorar sabores</a>
+                            </div>
+                        </div>
+
+                        <div class="panel-divider"></div>
+
+                        <div class="panel-heading">
+                            <span class="panel-step">02</span>
+                            <div>
+                                <h3>Presentación</h3>
+                                <p>Tu helado se servirá en un vaso.</p>
+                            </div>
+                        </div>
+
+                        <div class="presentation-option selected">
+                            <div class="presentation-icon">🥤</div>
+                            <div class="presentation-description">
+                                <h4>Vaso</h4>   
+                            </div>
+                            <span class="radio-selected"></span>
+                        </div>
+
+                        <div class="panel-divider"></div>
+
+                        <div class="panel-heading">
+                            <span class="panel-step">03</span>
+                            <div>
+                                <h3>Cantidad</h3>
+                                <p>¿Cuántos vasos quieres pedir?</p>
+                            </div>
+                        </div>
+
+                        <div class="quantity-control">
+                            <button id="restar-cantidad" type="button"
+                                    aria-label="Disminuir cantidad">−</button>
+
+                            <span id="cantidad">1</span>
+
+                            <button id="sumar-cantidad" type="button"
+                                    aria-label="Aumentar cantidad">+</button>
+                        </div>
+
+                    </div>
+
+                    <!-- RESUMEN -->
+                    <aside class="summary-panel">
+
+                        <div class="summary-header">
+                            <h3>Tu pedido</h3>
+                            <span>🧾</span>
+                        </div>
+
+                        <div class="summary-illustration">
+                            <div class="summary-cup-art">🍨</div>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Primer sabor</span>
+                            <strong id="resumen-sabor-1">Sin seleccionar</strong>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Segundo sabor</span>
+                            <strong id="resumen-sabor-2">Sin seleccionar</strong>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Presentación</span>
+                            <strong>Vaso</strong>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Cantidad</span>
+                            <strong id="resumen-cantidad">1</strong>
+                        </div>
+
+                        <div class="summary-divider"></div>
+
+                        <button class="btn btn-confirm"
+                                type="button"
+                                id="confirmar-pedido">
+                            Confirmar pedido →
+                        </button>
+
+                        <p class="summary-note">
+                            Confirma tu selección para iniciar
+                            la preparación automatizada.
+                        </p>
+
+                    </aside>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================
+             SEGUIMIENTO DE PEDIDO
+             Inicialmente oculto
+        ============================= -->
+        <section class="tracking-section hidden" id="seguimiento">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="eyebrow">TU PEDIDO ESTÁ EN CAMINO</span>
+                    <h2>Estado de <span>preparación</span></h2>
+                </div>
+
+                <div class="tracking-card">
+
+                    <div class="tracking-header">
+                        <div>
+                            <span class="tracking-label">Pedido</span>
+                            <h3 id="numero-pedido">#001</h3>
+                        </div>
+
+                        <span class="status-badge" id="estado-pedido">
+                            Pedido recibido
+                        </span>
+                    </div>
+
+                    <div class="tracking-progress">
+                        <div class="progress-bar" id="barra-progreso"></div>
+                    </div>
+
+                    <div class="tracking-steps">
+
+                        <div class="tracking-step" id="paso-recibido">
+                            <span class="tracking-dot"></span>
+                            <span>Pedido recibido</span>
+                        </div>
+
+                        <div class="tracking-step" id="paso-sabor-1">
+                            <span class="tracking-dot"></span>
+                            <span>Sirviendo primer sabor</span>
+                        </div>
+
+                        <div class="tracking-step" id="paso-sabor-2">
+                            <span class="tracking-dot"></span>
+                            <span>Sirviendo segundo sabor</span>
+                        </div>
+
+                        <div class="tracking-step" id="paso-finalizado">
+                            <span class="tracking-dot"></span>
+                            <span>Preparación finalizada</span>
+                        </div>
+
+                    </div>
+
+                    <p class="tracking-message" id="mensaje-estado">
+                        Esperando inicio de preparación...
+                    </p>
+
+                    <button class="btn btn-primary"
+                            type="button"
+                            id="nuevo-pedido">
+                        Realizar otro pedido
+                    </button>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================
+         VENTANA DE CONFIRMACIÓN
+         Inicialmente oculta
+    ============================= -->
+    <div class="modal-overlay hidden" id="modal-confirmacion">
+
+        <div class="modal-content" role="dialog"
+             aria-modal="true"
+             aria-labelledby="modal-titulo">
+
+            <button class="modal-close" type="button"
+                    id="cerrar-modal" aria-label="Cerrar">×</button>
+
+            <div class="modal-icon">🍦</div>
+
+            <h2 id="modal-titulo">¿Confirmar tu pedido?</h2>
+
+            <p>
+                Revisa que los sabores y la cantidad
+                sean correctos antes de continuar.
+            </p>
+
+            <div class="modal-order-info" id="detalle-modal">
+                Tu pedido aparecerá aquí.
+            </div>
+
+            <div class="modal-buttons">
+                <button class="btn btn-outline"
+                        type="button"
+                        id="cancelar-pedido">
+                    Volver
+                </button>
+
+                <button class="btn btn-primary"
+                        type="button"
+                        id="enviar-pedido">
+                    Sí, confirmar
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ============================
+         PIE DE PÁGINA
+    ============================= -->
+    <footer class="footer">
+        <div class="container footer-content">
+
+            <div>
+                <a href="#inicio" class="logo">
+                    <span class="logo-icon">🍦</span>
+                    <span>MANU<span class="logo-accent">FLEX</span></span>
+                </a>
+
+                <p>
+                    Heladería automatizada.
+                    Una experiencia dulce con tecnología.
+                </p>
+            </div>
+
+
+
+        </div>
+    </footer>
+
+    <script src="logic.js"></script>
+
+</body>
+</html>
